@@ -4,6 +4,8 @@ export default function Experience({experience, changeExperience}) {
 
     const [edit, changeEdit] = useState(false);
 
+    const [check, changeCheck] = useState(false);
+
     function handleChange() {
         let position = document.querySelector('#position').value;
         let company = document.querySelector('#company').value;
@@ -11,14 +13,40 @@ export default function Experience({experience, changeExperience}) {
         let desc = document.querySelector('#desc').value;
         let from = document.querySelector('#from').value;
         let to = document.querySelector('#to').value;
+
+        const checkbox = document.querySelector('#toNow');
+
         changeExperience({...experience,
             position: position,
             company: company,
             city: city,
             desc: desc,
             from: from,
-            to: to
         });
+
+        if(!checkbox.checked) {
+            changeExperience({...experience,
+                to: to
+            });
+        }
+    }
+
+    function handleToDate() {
+        const checkbox = document.querySelector('#toNow');
+        const inpTo = document.querySelector('#to');
+
+        if(checkbox.checked) {
+            changeExperience({...experience,
+                to: "Now"
+            });
+
+            changeCheck(true);
+        } else {
+            changeExperience({...experience,
+                to: inpTo.value
+            });
+            changeCheck(false)
+        }
     }
 
     function editExp() {
@@ -35,8 +63,8 @@ export default function Experience({experience, changeExperience}) {
                         <label htmlFor="company">Company:<input id="company" type="text" defaultValue={experience.company}/></label>
                         <label htmlFor="city">City:<input id="city" type="text" defaultValue={experience.city}/></label>
                         <label htmlFor="desc">Description:<input id="desc" type="textarea" defaultValue={experience.desc}/></label>
-                        <label htmlFor="from">From:<input id="from" type="date" defaultValue={experience.from}/></label>
-                        <label htmlFor="to">To:<input id="to" type="date" defaultValue={experience.to}/></label>
+                        <label htmlFor="from">From:<input id="from" type="month" defaultValue={experience.from}/></label>
+                        <label htmlFor="to"><span>To:<input id="to" type="month" defaultValue={experience.to} disabled={check}/></span><span><input checked={check} id='toNow' onChange={handleToDate} type="checkbox"/>Now</span></label>
                     </div>
                     <button onClick={() => { handleChange(); editExp();}}>Save</button></>) 
                     : 
