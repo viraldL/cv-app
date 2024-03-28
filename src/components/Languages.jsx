@@ -1,48 +1,51 @@
 import { useState } from 'react'
 
-export default function MainInfo({info, changeInfo}) {
+let id = 0;
+
+export default function Languages({languages, changeLanguages}) {
 
     const [edit, changeEdit] = useState(false);
-
-    function handleChange() {
-        let name = document.querySelector('#name').value;
-        let surname = document.querySelector('#surname').value;
-        let phone = document.querySelector('#phone').value;
-        let mail = document.querySelector('#mail').value;
-        changeInfo({...info,
-            name: name,
-            surname: surname,
-            phone: phone,
-            mail: mail
-        });
-    }
 
     function editInfo() {
         edit ? changeEdit(false) : changeEdit(true);
     }
 
+    function handleChange() {
+        let language = document.querySelector('#language').value;
+        changeLanguages([...languages, {id: id++, value: language}]);
+    }
+
+    function deleteLang(id) {
+        changeLanguages((languages) =>
+        languages.filter((item) => item.id !== id)
+      );
+    }
+
     return (
         <>
-            <div className={edit ? ('mainInfo editSection active') : ('mainInfo editSection')}>
+            <div className={edit ? ('languages editSection active') : ('languages editSection')}>
                 {edit ?
                     (<>
-                    <p>General Information</p>
+                    <p>Languages</p>
                     <div className="inputs">
-                        <label htmlFor="name">Name:<input id="name" type="text" defaultValue={info.name}/></label>
-                        <label htmlFor="surname">Surname:<input id="surname" type="text" defaultValue={info.surname}/></label>
-                        <label htmlFor="phone">Phone:<input id="phone" type="text" defaultValue={info.phone}/></label>
-                        <label htmlFor="mail">E-Mail:<input id="mail" type="text" defaultValue={info.mail}/></label>
+                        <label htmlFor="language">Language:<input id="language" type="text"/></label>
+                        {languages.map(language => ( <>
+                            <span className='langList'>
+                                <p key={language.id}>{language.value}</p>
+                                <button onClick={() => {deleteLang(language.id)}}>X</button>
+                            </span>
+                        </>
+                        ))}
                     </div>
-                    <button onClick={() => { handleChange(); editInfo();}}>Save</button></>) 
+                    <button onClick={handleChange}>Add</button></>) 
                     : 
                     (<>
                     <div>
-                        <p>General Information</p>
+                        <p>Languages</p>
                         <div className='smallInfo'>
-                            <p>{info.name}</p>
-                            <p>{info.surname}</p>
-                            <p>{info.phone}</p>
-                            <p>{info.mail}</p>
+                        {languages.map(language => (
+                            <p key={language.id}>{language.value}</p>
+                        ))}
                         </div>
                     </div>
                     </>)

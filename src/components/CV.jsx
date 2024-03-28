@@ -1,6 +1,6 @@
 // import { useState } from 'react'
 
-export default function CV({info, experience, education}) {
+export default function CV({info, experience, education, languages}) {
     return (
         <>
             <div className="cvPage">
@@ -30,6 +30,21 @@ export default function CV({info, experience, education}) {
                     <div className="expDesc">{experience.desc}</div>
                 </div>
                 {experience.position ? (<hr />) : ("")}
+                <div className="educationSection">
+                    <span className="eduDates"><span>{education.from}</span> {education.from && education.to ? (" - ") : ("")} <span>{education.to}</span></span>
+                    <div>
+                        <div className="eduName"><b>{education.school}</b></div>
+                        <div className="eduInfo">{education.major}</div>
+                        <div className="eduInfo">{education.degree}</div>
+                    </div>
+                </div>
+                {education.school ? (<hr />) : ("")}  
+                <div className="languagesSection">
+                    <b>Languages:</b>
+                    {languages.map(language => (
+                            <p key={language.id}>{language.value}</p>
+                        ))}
+                </div> 
             </div>
         </>
     )

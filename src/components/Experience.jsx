@@ -12,7 +12,7 @@ export default function Experience({experience, changeExperience}) {
         let city = document.querySelector('#city').value;
         let desc = document.querySelector('#desc').value;
         let from = document.querySelector('#from').value;
-        let to = document.querySelector('#to').value;
+        let to = document.querySelector('#expTo').value;
 
         const checkbox = document.querySelector('#toNow');
 
@@ -64,7 +64,7 @@ export default function Experience({experience, changeExperience}) {
                         <label htmlFor="city">City:<input id="city" type="text" defaultValue={experience.city}/></label>
                         <label htmlFor="desc">Description:<input id="desc" type="textarea" defaultValue={experience.desc}/></label>
                         <label htmlFor="from">From:<input id="from" type="month" defaultValue={experience.from}/></label>
-                        <label htmlFor="to"><span>To:<input id="to" type="month" defaultValue={experience.to} disabled={check}/></span><span><input checked={check} id='toNow' onChange={handleToDate} type="checkbox"/>Now</span></label>
+                        <label htmlFor="expTo"><span>To:<input id="expTo" type="month" defaultValue={experience.to} disabled={check}/></span><span><input checked={check} id='toNow' onChange={handleToDate} type="checkbox"/>Now</span></label>
                     </div>
                     <button onClick={() => { handleChange(); editExp();}}>Save</button></>) 
                     : 
@@ -79,19 +79,19 @@ export default function Experience({experience, changeExperience}) {
                                 <p>{experience.from && experience.to ? experience.from + " --- " +  experience.to : ""}</p>
                             </div>
                         </div>
-                        </>)
+                    </>)
                 }
                 <button onClick={editExp}>
                 {edit ? (<>
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>
-                        </svg>
-                    </>) : (
+                        </svg>Close
+                    </>) : (<>
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
-                        </svg>
+                        </svg>Edit</>
                     )}
-                Edit</button>
+                </button>
             </div>
         </>
     )

@@ -32,8 +32,8 @@ export default function Experience({education, changeEducation}) {
                         <label htmlFor="major">Field of study:<input id="major" type="text" defaultValue={education.major}/></label>
                         <label htmlFor="school">School:<input id="school" type="text" defaultValue={education.school}/></label>
                         <label htmlFor="degree">Degree:<input id="degree" type="text" defaultValue={education.degree}/></label>
-                        <label htmlFor="from">From:<input id="from" type="date" defaultValue={education.from}/></label>
-                        <label htmlFor="to">To:<input id="to" type="date" defaultValue={education.to}/></label>
+                        <label htmlFor="from">From:<input id="from" type="month" defaultValue={education.from}/></label>
+                        <label htmlFor="to">To:<input id="to" type="month" defaultValue={education.to}/></label>
                     </div>
                     <button onClick={() => { handleChange(); editEdu();}}>Save</button></>) 
                     : 
@@ -53,13 +53,13 @@ export default function Experience({education, changeEducation}) {
                 {edit ? (<>
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>
-                        </svg>
-                    </>) : (
+                        </svg>Close
+                    </>) : (<>
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
-                        </svg>
+                        </svg>Edit</>
                     )}
-                Edit</button>
+                </button>
             </div>
         </>
     )
